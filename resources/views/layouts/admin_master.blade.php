@@ -7,7 +7,7 @@
     <title>CMS</title>
     {{-- <link rel="icon" href="{{ asset('/home/img/icon/icon.png') }}" type="image/icon" /> --}}
     {{-- <link rel="shortcut icon" href="{{ asset('/home/img/icon/icon.png') }}" type="image/icon" /> --}}
-   
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     @include('admin.include.topscript')
 </head>
 
@@ -30,10 +30,10 @@
                                         style="color: #2db843;">Dashboard</a></li>
                                 </li>
 
-                                {{-- <?php $segments = request()->segment(1); ?>
+                                 <?php $segments = request()->segment(1); ?>
                                 <li class="breadcrumb-item">
                                     <a href="{{ $segments }}" style="color: black;">{{ request()->segment(1) }}</a>
-                                </li> --}}
+                                </li> 
 
                             </ol>
                         </div>

@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class CityGovernment extends Model
 {
     use HasFactory;
-}
+    protected $guarded=[];
+   
+}   

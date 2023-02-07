@@ -11,7 +11,7 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <li class="nav-item">
-                    <a href="#" class="nav-link @if (url()->current() == url('/dashboard')) active @endif">
+                    <a href="{{route('admin-dashboard')}}" class="nav-link @if (url()->current() == url('/dashboard')) active @endif">
                         <i class="nav-icon fas fa-atom"></i>
                         <p>
                             Dashboard
@@ -21,7 +21,7 @@
                 </li>
                 <!-- User List -->
                 <li class="nav-item">
-                    <a href="" class="nav-link @if (url()->current() == url('/users')) active @endif">
+                    <a href="{{route('index-event')}}" class="nav-link @if (url()->current() == url('/users')) active @endif">
                         <i class="nav-icon fa fa-calendar"></i>
                         <p>
                             Calendar management
@@ -50,19 +50,19 @@
 
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="#" class="nav-link @if (url()->current() == url('/')) active @endif">
+                            <a href="{{route('index-city')}}" class="nav-link @if (url()->current() == url('/')) active @endif">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>City Government</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link @if (url()->current() == url('/')) active @endif">
+                            <a href="{{route('index-deparment')}}" class="nav-link @if (url()->current() == url('/')) active @endif">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Department</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link @if (url()->current() == url('/')) active @endif">
+                            <a href="{{route('index-service')}}" class="nav-link @if (url()->current() == url('/')) active @endif">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Services</p>
                             </a>
@@ -74,7 +74,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link @if (url()->current() == url('/')) active @endif">
+                            <a href="{{route('index-contact')}}" class="nav-link @if (url()->current() == url('/')) active @endif">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Contact</p>
                             </a>
@@ -91,21 +91,6 @@
                     </a>
                 </li>
             </ul>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
         </nav>
