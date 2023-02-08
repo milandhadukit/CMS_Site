@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Contact;
-use File;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
+
 
 class ContactController extends Controller
 {
@@ -22,8 +24,8 @@ class ContactController extends Controller
     {
         $request->validate([
             'employment_descreption' => 'required',
-            'title' => 'required',
-            'description' => 'required',
+            'title' => 'required|min:3',
+            'description' => 'required|min:5',
             'image' => 'required|mimes:jpeg,png,jpg',
         ]);
         try {
@@ -38,6 +40,7 @@ class ContactController extends Controller
                 $imageName
             );
             $contact->image = $imageName;
+            $contact->slug = Str::slug($request->title);
 
             $contact->save();
 
@@ -67,6 +70,8 @@ class ContactController extends Controller
             $contact->employment_descreption = $request->employment_descreption;
             $contact->title = $request->title;
             $contact->description = $request->description;
+            $contact->slug = Str::slug($request->title);
+
 
             if ($request->has('image')) {
                 $path = public_path('Contact_image/' . $contact->image);
@@ -83,6 +88,7 @@ class ContactController extends Controller
                 );
 
                 $contact->image = $imageName;
+
             }
 
             $contact->update();

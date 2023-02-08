@@ -14,7 +14,7 @@
                 <a href="{{ route('add-event') }}" class="btn btn-success" style="float: right"> Add Event </a>
                 <table class="table table-bordered">
                     <thead>
-
+                        <th>No.</th>
                         <th>Event</th>
                         <th>Description</th>
                         <th>date</th>
@@ -25,9 +25,10 @@
                         <th>Action</th>
                     </thead>
                     <tbody>
+                        <?php $number = 1; ?>
                         @foreach ($event as $data)
                             <tr>
-
+                                <td>{{$number++}}</td>
                                 <td>{{ $data->title_event }}</td>
                                 <td>{{ $data->description }}</td>
 
@@ -101,7 +102,8 @@
                         'id': id
                     },
                     success: function(data) {
-                        console.log(data.success)
+                        // console.log(data.success)
+                        alert(data.success);
                     }
                 });
             })

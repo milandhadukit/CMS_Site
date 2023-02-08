@@ -36,8 +36,8 @@
 
 
                             <div class="form-group">
-                                <label class="label"> title event: </label>
-                                <input type="text" name="title_event" class="form-control" required autofocus />
+                                <label class="label"> Title Event: </label>
+                                <input type="text" name="title_event" class="form-control"  autofocus />
                                 @error('title_event')
                                     <span class="error" style="color: red">{{ $message }}</span>
                                 @enderror
@@ -46,7 +46,7 @@
 
                             <div class="form-group">
                                 <label class="label"> Description: </label>
-                                <textarea name="description" rows="2" cols="30" class="form-control" required></textarea>
+                                <textarea name="description" rows="2" cols="30" class="form-control" ></textarea>
                                 @error('description')
                                     <span class="error" style="color: red">{{ $message }}</span>
                                 @enderror
@@ -54,7 +54,7 @@
 
                             <div class="form-group">
 
-                                <label class="label">  date: </label>
+                                <label class="label">  Date: </label>
                                 <input type="date" name="start_date" class="form-control"  id="txtDate"  />
                                 @error('start_date')
                                     <span class="error" style="color: red">{{ $message }}</span>
@@ -62,8 +62,8 @@
                             </div>
             
                             <div class="form-group">
-                                <label class="label"> Time: </label>
-                                {{-- <input type="time" name="time" class="form-control"  required /> --}}
+                                <label class="label">Start Time: </label>
+                                {{-- <input type="time" name="time" class="form-control"   /> --}}
 
 
                                 <input type="text" id="timepicker"  name="time" class="form-control" />
@@ -86,7 +86,7 @@
 
                             <div class="form-group">
                                 <label class="label"> Location: </label>
-                                <input type="text" name="location" class="form-control" required  />
+                                <input type="text" name="location" class="form-control"   />
                                 @error('location')
                                     <span class="error" style="color: red">{{ $message }}</span>
                                 @enderror

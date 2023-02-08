@@ -35,12 +35,12 @@
                      @foreach ($cityGoverment as $data)
                             <tr>
                                 <td>{{ $data->title_city }}</td>
-                                <td>{{ $data->description_city }}</td>
+                                <td>{{ $data->descreption_city }}</td>
                 
                                 <td>{!! html_entity_decode($data->left_content) !!}</td>
                                 <td>{!! html_entity_decode($data->right_content) !!}</td>
                                 <td> 
-                                    <a href="{{route('edit-city',$data->slug)}}" class="btn btn-dark">
+                                    <a href="{{route('edit-city',$data->id)}}" class="btn btn-dark">
                                        
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
                                         <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
@@ -48,7 +48,7 @@
                                       </svg>
                                     </a>
 
-                                    <a href="{{ route('delete-city', $data->slug) }}" class="btn btn-danger"
+                                    <a href="{{ route('delete-city', $data->id) }}" class="btn btn-danger"
                                         id="delete">  
 
                                         <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">

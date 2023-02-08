@@ -1,8 +1,6 @@
 @extends('layouts.admin_master')
 
-{{-- <head>
-    <meta name="_token" content="{{ csrf_token() }}">
-</head> --}}
+
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
@@ -26,9 +24,7 @@
                         <th > Title</th>
                         <th> Descreption</th>
                         <th>left content</th>
-                        <th>Left Image</th>
                         <th>right content</th>
-                        <th>Right Image</th>
                         <th >Action</th>
                     </thead>
                     <tbody >
@@ -40,20 +36,20 @@
                 
                                 <td>{!! html_entity_decode($data->left_content) !!}</td>
                                 
-                                <td>
+                                {{-- <td>
                                     <img src="{{ asset('Service_Image/'.$data->left_image) }}" alt="service image" title=" image" height="80px" width="80px">
-                                </td>
+                                </td> --}}
 
                                
                                 <td>{!! html_entity_decode($data->right_content) !!}</td>
 
-                                <td>
+                                {{-- <td>
                                     <img src="{{ asset('Service_Image/'.$data->right_image) }}" alt="service" title=" image2" height="80px" width="80px">
-                                </td>
+                                </td> --}}
 
                                 <td> 
-                                    <a href="{{route('edit-service',$data->slug)}}" class="btn btn-dark">Edit</a>
-                                    <a href="{{ route('delete-service', $data->slug) }}" class="btn btn-danger"
+                                    <a href="{{route('edit-service',$data->id)}}" class="btn btn-dark">Edit</a>
+                                    <a href="{{ route('delete-service', $data->id) }}" class="btn btn-danger"
                                         id="delete">Delete</a>
 
                                         <label class="switch" >

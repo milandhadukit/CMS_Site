@@ -27,7 +27,7 @@ class ServiceController extends Controller
     {
         $request->validate([
             'title' => 'required|min:2',
-            'description' => 'nullable',
+            'description' => 'nullable|min:5',
             'left_content' => 'nullable|min:5',
             'right_content' => 'nullable|min:5',
         ]);
@@ -39,39 +39,39 @@ class ServiceController extends Controller
             $service->right_content = $request->right_content;
             $service->slug = Str::slug($request->title);
 
-            if ($request->has('left_image')) {
-                $leftImage = $request->left_image->getClientOriginalName();
-                $fileNameLeft = pathinfo($leftImage, PATHINFO_FILENAME);
-                $leftImageExtension = pathinfo($leftImage, PATHINFO_EXTENSION);
-                $imageName1 =
-                    $fileNameLeft . time() . '.' . $leftImageExtension;
-                $nameImage1 = str_replace(' ', '_', $imageName1);
-                $image = $request->left_image->move(
-                    public_path('/Service_Image'),
-                    $nameImage1
-                );
+            // if ($request->has('left_image')) {
+            //     $leftImage = $request->left_image->getClientOriginalName();
+            //     $fileNameLeft = pathinfo($leftImage, PATHINFO_FILENAME);
+            //     $leftImageExtension = pathinfo($leftImage, PATHINFO_EXTENSION);
+            //     $imageName1 =
+            //         $fileNameLeft . time() . '.' . $leftImageExtension;
+            //     $nameImage1 = str_replace(' ', '_', $imageName1);
+            //     $image = $request->left_image->move(
+            //         public_path('/Service_Image'),
+            //         $nameImage1
+            //     );
 
-                $service->left_image = $nameImage1;
-            }
+            //     $service->left_image = $nameImage1;
+            // }
 
-            if ($request->has('right_image')) {
-                $rightImage = $request->right_image->getClientOriginalName();
-                $filename = pathinfo($rightImage, PATHINFO_FILENAME);
-                $rightImageExtension = pathinfo(
-                    $rightImage,
-                    PATHINFO_EXTENSION
-                );
+            // if ($request->has('right_image')) {
+            //     $rightImage = $request->right_image->getClientOriginalName();
+            //     $filename = pathinfo($rightImage, PATHINFO_FILENAME);
+            //     $rightImageExtension = pathinfo(
+            //         $rightImage,
+            //         PATHINFO_EXTENSION
+            //     );
 
-                $imageName2 = $filename . time() . '.' . $rightImageExtension;
+            //     $imageName2 = $filename . time() . '.' . $rightImageExtension;
 
-                $nameImage2 = str_replace(' ', '_', $imageName2);
-                $image = $request->right_image->move(
-                    public_path('/Service_Image'),
-                    $imageName2
-                );
+            //     $nameImage2 = str_replace(' ', '_', $imageName2);
+            //     $image = $request->right_image->move(
+            //         public_path('/Service_Image'),
+            //         $imageName2
+            //     );
 
-                $service->right_image = $nameImage2;
-            }
+            //     $service->right_image = $nameImage2;
+            // }
             $service->save();
             return redirect()
                 ->back()
@@ -81,70 +81,70 @@ class ServiceController extends Controller
         }
     }
 
-    public function editService($slug)
+    public function editService($id)
     {
-        $service = Service::where('slug', $slug)->first();
+        $service = Service::where('id', $id)->first();
         return view('admin.CMSPages.Service.edit', compact('service'));
     }
 
-    public function updateService(Request $request, $slug)
+    public function updateService(Request $request, $id)
     {
         $request->validate([
             'title' => 'required|min:2',
-            'description' => 'nullable',
+            'description' => 'nullable|min:5',  
             'left_content' => 'nullable|min:5',
             'right_content' => 'nullable|min:5',
         ]);
         try {
-            $service = Service::where('slug', $slug)->first();
+            $service = Service::where('id', $id)->first();
             $service->title = $request->title;
             $service->description = $request->description;
             $service->left_content = $request->left_content;
             $service->right_content = $request->right_content;
             $service->slug = Str::slug($request->title);
 
-            if ($request->has('left_image')) {
-                $leftImage = $request->left_image->getClientOriginalName();
-                $fileNameLeft = pathinfo($leftImage, PATHINFO_FILENAME);
-                $leftImageExtension = pathinfo($leftImage, PATHINFO_EXTENSION);
+            // if ($request->has('left_image')) {
+            //     $leftImage = $request->left_image->getClientOriginalName();
+            //     $fileNameLeft = pathinfo($leftImage, PATHINFO_FILENAME);
+            //     $leftImageExtension = pathinfo($leftImage, PATHINFO_EXTENSION);
 
-                $path = public_path('Service_Image/' . $service->left_image);
-                if (File::exists($path)) {
-                    unlink($path);
-                }
+            //     $path = public_path('Service_Image/' . $service->left_image);
+            //     if (File::exists($path)) {
+            //         unlink($path);
+            //     }
 
-                $imageName1 =
-                    $fileNameLeft . time() . '.' . $leftImageExtension;
-                $nameImage1 = str_replace(' ', '_', $imageName1);
-                $image = $request->left_image->move(
-                    public_path('/Service_Image'),
-                    $nameImage1
-                );
+            //     $imageName1 =
+            //         $fileNameLeft . time() . '.' . $leftImageExtension;
+            //     $nameImage1 = str_replace(' ', '_', $imageName1);
+            //     $image = $request->left_image->move(
+            //         public_path('/Service_Image'),
+            //         $nameImage1
+            //     );
 
-                $service->left_image = $nameImage1;
-            }
+            //     $service->left_image = $nameImage1;
+            // }
 
-            if ($request->has('right_image')) {
-                $rightImage = $request->right_image->getClientOriginalName();
-                $filename = pathinfo($rightImage, PATHINFO_FILENAME);
-                $rightImageExtension = pathinfo(
-                    $rightImage,
-                    PATHINFO_EXTENSION
-                );
+            // if ($request->has('right_image')) {
+            //     $rightImage = $request->right_image->getClientOriginalName();
+            //     $filename = pathinfo($rightImage, PATHINFO_FILENAME);
+            //     $rightImageExtension = pathinfo(
+            //         $rightImage,
+            //         PATHINFO_EXTENSION
+            //     );
 
-                $path = public_path('Service_Image/' . $service->right_image);
-                if (File::exists($path)) {
-                    unlink($path);
-                }
-                $imageName2 = $filename . time() . '.' . $rightImageExtension;
-                $nameImage2 = str_replace(' ', '_', $imageName2);
-                $image = $request->right_image->move(
-                    public_path('/Service_Image'),
-                    $imageName2
-                );
+            //     $path = public_path('Service_Image/' . $service->right_image);
+            //     if (File::exists($path)) {
+            //         unlink($path);
+            //     }
+            //     $imageName2 = $filename . time() . '.' . $rightImageExtension;
+            //     $nameImage2 = str_replace(' ', '_', $imageName2);
+            //     $image = $request->right_image->move(
+            //         public_path('/Service_Image'),
+            //         $imageName2
+            //     );
 
-                $service->right_image = $nameImage2;
-            }
+            //     $service->right_image = $nameImage2;
+            // }
 
             $service->update();
             return redirect()
@@ -155,9 +155,9 @@ class ServiceController extends Controller
         }
     }
 
-    public function deleteService($slug)
+    public function deleteService($id)
     {
-        $service = Service::where('slug', $slug)->first();
+        $service = Service::where('id', $id)->first();
         $service->delete();
     }
 

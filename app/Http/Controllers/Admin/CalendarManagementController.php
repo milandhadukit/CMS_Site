@@ -12,7 +12,7 @@ class CalendarManagementController extends Controller
 {
     public function indexEvent()
     {
-        $event = Event::paginate(6);
+        $event = Event::paginate(5);
         return view('admin.CalendarManagement.index', compact('event'));
     }
     public function addEvent()
@@ -25,7 +25,7 @@ class CalendarManagementController extends Controller
         $request->validate([
             'title_event' => 'required|min:2',
             'start_date' => 'required',
-            'description' => 'nullable',
+            'description' => 'nullable|min:5',
             'time' => 'required',
             'location'=>'nullable|min:5',
             
@@ -39,7 +39,7 @@ class CalendarManagementController extends Controller
             $event->end_time = $request->end_time;
             $event->location = $request->location;
             $event->slug=Str::slug($request->title_event);
-            dd($event);
+            // dd($event);
             $event->save();
 
             return redirect()

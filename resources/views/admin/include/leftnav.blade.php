@@ -31,7 +31,7 @@
                 </li>
                 <!-- Customer List -->
                 <li class="nav-item">
-                    <a href="{{ URL('/employee') }}" class="nav-link @if (url()->current() == url('/employee')) active @endif">
+                    <a href="{{ route('index-video') }}" class="nav-link @if (url()->current() == url('/employee')) active @endif">
                         <i class="nav-icon fas fa-users"></i>
                         <p>
                             Video Management
@@ -68,7 +68,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link @if (url()->current() == url('/')) active @endif">
+                            <a href="{{route('index-community')}}" class="nav-link @if (url()->current() == url('/')) active @endif">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Community</p>
                             </a>
@@ -83,7 +83,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="{{ URL('/review') }}" class="nav-link @if (url()->current() == url('/review')) active @endif">
+                    <a href="{{ route('documents') }}" class="nav-link @if (url()->current() == url('/review')) active @endif">
                         <i class="nav-icon fas fa-comments"></i>
                         <p>
                             Document management

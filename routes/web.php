@@ -9,6 +9,9 @@ use App\Http\Controllers\Admin\CalendarManagementController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\DepartmentController;
 use App\Http\Controllers\Admin\CityGovernemntController;
+use App\Http\Controllers\Admin\CommunityController;
+use App\Http\Controllers\Admin\VideoManagementController;
+use App\Http\Controllers\Admin\DocumentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -59,27 +62,66 @@ Route::get('status-event', [CalendarManagementController::class, 'changeStatusEv
 Route::get('index-service', [ServiceController::class, 'indexService'])->name('index-service');
 Route::get('add-service', [ServiceController::class, 'addService'])->name('add-service');
 Route::post('store-service', [ServiceController::class, 'storeService'])->name('store-service');
-Route::get('edit-service/{slug}', [ServiceController::class, 'editService'])->name('edit-service');
-Route::post('update-service/{slug}', [ServiceController::class, 'updateService'])->name('update-service');
-Route::get('delete-service/{slug}', [ServiceController::class, 'deleteService'])->name('delete-service');
+Route::get('edit-service/{id}', [ServiceController::class, 'editService'])->name('edit-service');
+Route::post('update-service/{id}', [ServiceController::class, 'updateService'])->name('update-service');
+Route::get('delete-service/{id}', [ServiceController::class, 'deleteService'])->name('delete-service');
 Route::get('status-service', [ServiceController::class, 'changeStatusService'])->name('status-service');
 Route::get('search-services', [ServiceController::class, 'searchService'])->name('search-service');
 
 Route::get('index-deparment', [DepartmentController::class, 'indexDepartment'])->name('index-deparment');
 Route::get('add-deparment', [DepartmentController::class, 'addDepartment'])->name('add-deparment');
 Route::post('store-deparment', [DepartmentController::class, 'storeDepartment'])->name('store-deparment');
-Route::get('delete-deparment/{slug}', [DepartmentController::class, 'deleteDepartment'])->name('delete-deparment');
-Route::get('edit-deparment/{slug}', [DepartmentController::class, 'editDepartment'])->name('edit-deparment');
-Route::post('update-deparment/{slug}', [DepartmentController::class, 'updateDepartment'])->name('update-deparment');
+Route::get('delete-deparment/{id}', [DepartmentController::class, 'deleteDepartment'])->name('delete-deparment');
+Route::get('edit-deparment/{id}', [DepartmentController::class, 'editDepartment'])->name('edit-deparment');
+Route::post('update-deparment/{id}', [DepartmentController::class, 'updateDepartment'])->name('update-deparment');
 Route::get('status-deparment', [DepartmentController::class, 'changeStatusDepartment'])->name('status-deparment');
 Route::get('search-deparment', [DepartmentController::class, 'searchDepartment'])->name('search-deparment');
 
 Route::get('index-city', [CityGovernemntController::class, 'indexCity'])->name('index-city');
 Route::get('add-city', [CityGovernemntController::class, 'addCity'])->name('add-city');
 Route::post('store-city', [CityGovernemntController::class, 'storeCity'])->name('store-city');
-Route::get('delete-city/{slug}', [CityGovernemntController::class, 'deleteCity'])->name('delete-city');
-Route::get('edit-city/{slug}', [CityGovernemntController::class, 'editCity'])->name('edit-city');
-Route::post('update-city/{slug}', [CityGovernemntController::class, 'updateCity'])->name('update-city');
+Route::get('delete-city/{id}', [CityGovernemntController::class, 'deleteCity'])->name('delete-city');
+Route::get('edit-city/{id}', [CityGovernemntController::class, 'editCity'])->name('edit-city');
+Route::post('update-city/{id}', [CityGovernemntController::class, 'updateCity'])->name('update-city');
 Route::get('status-city', [CityGovernemntController::class, 'changeStatusCity'])->name('status-city');
 Route::get('search-city', [CityGovernemntController::class, 'searchCity'])->name('search-city');
 
+Route::get('index-community', [CommunityController::class, 'indexCommunity'])->name('index-community');
+Route::get('add-community', [CommunityController::class, 'addCommunity'])->name('add-community');
+Route::post('store-community', [CommunityController::class, 'storeCommunity'])->name('store-community');
+Route::get('delete-community/{id}', [CommunityController::class, 'deleteCommunity'])->name('delete-community');
+Route::get('edit-community/{id}', [CommunityController::class, 'editCommunity'])->name('edit-community');
+Route::post('update-community/{id}', [CommunityController::class, 'updateCommunity'])->name('update-community');
+Route::get('status-community', [CommunityController::class, 'changeStatusCommunity'])->name('status-community');
+Route::get('search-community', [CommunityController::class, 'searchCommunity'])->name('search-community');
+
+Route::get('index-video', [VideoManagementController::class, 'indexVideo'])->name('index-video');
+Route::get('add-video', [VideoManagementController::class, 'addVideo'])->name('add-video');
+Route::post('store-video', [VideoManagementController::class, 'storeVideo'])->name('store-video');
+Route::get('delete-video/{id}', [VideoManagementController::class, 'deleteVideo'])->name('delete-video');
+Route::get('edit-video/{id}', [VideoManagementController::class, 'editVideo'])->name('edit-video');
+Route::post('update-video/{id}', [VideoManagementController::class, 'updateVideo'])->name('update-video');
+Route::get('status-video', [VideoManagementController::class, 'changeStatusVideo'])->name('status-video');
+
+
+
+
+
+Route::get('documents', [DocumentController::class, 'index'])->name('documents');
+Route::get('documents/create', [DocumentController::class, 'create'])->name('documents.create');
+Route::post('documents/store', [DocumentController::class, 'store'])->name('documents.store');
+Route::get('documents/edit/{id}', [DocumentController::class, 'edit'])->name('documents.edit');
+Route::post('documents/update/{id}', [DocumentController::class, 'update'])->name('documents.update');
+Route::get('documents/delete/{id}', [DocumentController::class, 'delete'])->name('documents.delete');
+Route::get('documents/view/{slug}', [DocumentController::class, 'view'])->name('documents.view');
+Route::get('documents/download/{document}', [DocumentController::class, 'download'])->name('documents.download');
+Route::get('documents/display/{document}', [DocumentController::class, 'display'])->name('documents.display');
+Route::get('documents/changeStatus', [DocumentController::class, 'changeStatus'])->name('documents.changeStatus');
+
+
+// Route::post('multipleusersdelete', ['DeleteUserController@multipleusersdelete');
+Route::post('multipleusersdelete', [DocumentController::class, 'multipleusersdelete']);
+
+
+// multiple id delete
+https://techsolutionstuff.com/post/how-to-delete-multiple-records-using-checkbox-in-laravel

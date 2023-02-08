@@ -15,7 +15,7 @@
 
                     <div class="card-header">Update Service</div>
                     <div class="card-body">
-                        <form  action="{{ route('update-deparment',$department->slug) }}" method="POST" enctype="multipart/form-data">
+                        <form  action="{{ route('update-deparment',$department->id) }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">
                                 <label class="label"> Title: </label>

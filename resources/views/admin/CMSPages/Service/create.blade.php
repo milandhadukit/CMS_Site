@@ -42,13 +42,13 @@
                                 @enderror
                             </div>
 
-                            <div class="form-group">
+                            {{-- <div class="form-group">
                                 <label class="label">Left Image: </label>
                                 <input type="file" name="left_image" class="form-control" accept="image/*"/>
                                 @error('left_image')
                                     <span class="error" style="color: red">{{ $message }}</span>
                                 @enderror
-                            </div>
+                            </div> --}}
 
                             <div class="form-group">
                                 <label class="label"> right content : </label>
@@ -57,13 +57,13 @@
                                     <span class="error" style="color: red">{{ $message }}</span>
                                 @enderror
                             </div>
-                            <div class="form-group">
+                            {{-- <div class="form-group">
                                 <label class="label">right Image: </label>
                                 <input type="file" name="right_image" class="form-control" accept="image/*"/>
                                 @error('right_image')
                                     <span class="error" style="color: red">{{ $message }}</span>
                                 @enderror
-                            </div>
+                            </div> --}}
 
                             <div class="form-group">
                                 <input type="submit" class="btn btn-success" value="submit" />

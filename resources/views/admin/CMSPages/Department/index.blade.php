@@ -1,8 +1,5 @@
 @extends('layouts.admin_master')
 
-{{-- <head>
-    <meta name="_token" content="{{ csrf_token() }}">
-</head> --}}
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
@@ -40,8 +37,8 @@
                                 <td>{!! html_entity_decode($data->left_content) !!}</td>
                                 <td>{!! html_entity_decode($data->right_content) !!}</td>
                                 <td> 
-                                    <a href="{{route('edit-deparment',$data->slug)}}" class="btn btn-dark">Edit</a>
-                                    <a href="{{ route('delete-deparment', $data->slug) }}" class="btn btn-danger"
+                                    <a href="{{route('edit-deparment',$data->id)}}" class="btn btn-dark">Edit</a>
+                                    <a href="{{ route('delete-deparment', $data->id) }}" class="btn btn-danger"
                                         id="delete">Delete</a>
 
                                         <label class="switch" >

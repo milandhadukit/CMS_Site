@@ -49,10 +49,10 @@ class CityGovernemntController extends Controller
             return $e->getMessage();
         }
     }
-    public function deleteCity($slug)
+    public function deleteCity($id)
     {
         try {
-            $cityGoverment = CityGovernment::where('slug', $slug)->first();
+            $cityGoverment = CityGovernment::where('id', $id)->first();
             $cityGoverment->delete();
             return redirect()
                 ->back()
@@ -61,15 +61,15 @@ class CityGovernemntController extends Controller
             return $e->getMessage();
         }
     }
-    public function editCity($slug)
+    public function editCity($id)
     {
-        $cityGoverment = CityGovernment::where('slug', $slug)->first();
+        $cityGoverment = CityGovernment::where('id', $id)->first();
         return view(
             'admin.CMSPages.CityGovernment.edit',
             compact('cityGoverment')
         );
     }
-    public function updateCity(Request $request, $slug)
+    public function updateCity(Request $request, $id)
     {
         $request->validate([
             'title_city' => 'required|min:2',
@@ -78,7 +78,7 @@ class CityGovernemntController extends Controller
             'right_content' => 'nullable|min:5',
         ]);
         try {
-            $cityGoverment = CityGovernment::where('slug', $slug)->first();
+            $cityGoverment = CityGovernment::where('id', $id)->first();
             $cityGoverment->title_city = $request->title_city;
             $cityGoverment->descreption_city = $request->descreption_city;
             $cityGoverment->left_content = $request->left_content;

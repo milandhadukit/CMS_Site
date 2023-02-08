@@ -19,7 +19,7 @@
                             @csrf
                             <div class="form-group">
                                 <label class="label"> Title: </label>
-                                <input type="text" name="title_city" class="form-control" required />
+                                <input type="text" name="title_city" class="form-control"  />
                                 @error('title_city')
                                     <span class="error" style="color: red">{{ $message }}</span>
                                 @enderror

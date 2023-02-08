@@ -33,7 +33,8 @@ class DepartmentController extends Controller
         try {
             $department = new Department();
             $department->title_department = $request->title_department;
-            $department->description_department = $request->description_department;
+            $department->description_department =
+                $request->description_department;
             $department->left_content = $request->left_content;
             $department->right_content = $request->right_content;
             $department->slug = Str::slug($request->title_department);
@@ -46,12 +47,12 @@ class DepartmentController extends Controller
             return $e->getMessage();
         }
     }
-    
-    public function deleteDepartment($slug)
+
+    public function deleteDepartment($id)
     {
         try {
-            $department = Department::where('slug', $slug)->first();
-         
+            $department = Department::where('id', $id)->first();
+
             $department->delete();
 
             return redirect()
@@ -62,13 +63,13 @@ class DepartmentController extends Controller
         }
     }
 
-    public function editDepartment($slug)
+    public function editDepartment($id)
     {
-        $department = Department::where('slug', $slug)->first();
+        $department = Department::where('slug', $id)->first();
         return view('admin.CMSPages.Department.edit', compact('department'));
     }
 
-    public function updateDepartment(Request $request,$slug)
+    public function updateDepartment(Request $request, $id)
     {
         $request->validate([
             'title_department' => 'required|min:2',
@@ -77,9 +78,10 @@ class DepartmentController extends Controller
             'right_content' => 'nullable|min:5',
         ]);
         try {
-            $department = Department::where('slug', $slug)->first();
+            $department = Department::where('slug', $id)->first();
             $department->title_department = $request->title_department;
-            $department->description_department = $request->description_department;
+            $department->description_department =
+                $request->description_department;
             $department->left_content = $request->left_content;
             $department->right_content = $request->right_content;
             $department->slug = Str::slug($request->title_department);

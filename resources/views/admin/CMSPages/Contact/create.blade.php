@@ -23,7 +23,7 @@
 
                             <div class="form-group">
                                 <label class="label"> Employment Descreption: </label>
-                                <textarea name="employment_descreption" rows="2" cols="30" class="form-control" required autofocus></textarea>
+                                <textarea name="employment_descreption" rows="2" cols="30" class="form-control"  autofocus></textarea>
                                 @error('employment_descreption')
                                     <span class="error" style="color: red">{{ $message }}</span>
                                 @enderror
@@ -32,7 +32,7 @@
                             <div class="form-group">
 
                                 <label class="label"> Title: </label>
-                                <input type="text" name="title" class="form-control" required />
+                                <input type="text" name="title" class="form-control"  />
                                 @error('title')
                                     <span class="error" style="color: red">{{ $message }}</span>
                                 @enderror
@@ -40,7 +40,7 @@
 
                             <div class="form-group">
                                 <label class="label"> Description: </label>
-                                <textarea name="description" rows="2" cols="30" class="form-control" required></textarea>
+                                <textarea name="description" rows="2" cols="30" class="form-control" ></textarea>
                                 @error('description')
                                     <span class="error" style="color: red">{{ $message }}</span>
                                 @enderror
@@ -49,7 +49,7 @@
                             <div class="form-group">
 
                                 <label class="label"> Image: </label>
-                                <input type="file" name="image" class="form-control" required />
+                                <input type="file" name="image" class="form-control"  />
                                 @error('image')
                                     <span class="error" style="color: red">{{ $message }}</span>
                                 @enderror

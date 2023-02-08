@@ -15,7 +15,7 @@
 
                     <div class="card-header">Update City Goverment</div>
                     <div class="card-body">
-                        <form action="{{ route('update-city',$cityGoverment->slug) }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('update-city',$cityGoverment->id) }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">
                                 <label class="label"> Title: </label>
