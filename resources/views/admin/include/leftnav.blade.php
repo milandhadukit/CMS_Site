@@ -79,6 +79,18 @@
                                 <p>Contact</p>
                             </a>
                         </li>
+
+                        <li class="nav-item">
+                            <a href="{{route('dashboard-create')}}" class="nav-link @if (url()->current() == url('/')) active @endif">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Deshboard Data</p>
+                            </a>
+                        </li>
+
+                        
+
+
+
                     </ul>
                 </li>
 

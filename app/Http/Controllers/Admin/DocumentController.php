@@ -8,6 +8,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\DB;
 use App\Models\Document;
+use App\Models\UserLog;
 
 class DocumentController extends Controller
 {
@@ -47,6 +48,17 @@ class DocumentController extends Controller
         $documents->description = $request->description;
         $documents->publish_date = $request->publish_date;
         $documents->save();
+
+
+       // user log create
+        if($documents){
+            $logType = 'Created';
+            $moduleId = $documents->id;
+            $module = 'Document';
+            $desc = auth()->user()->name. 'created new Document' . $documents->title;
+             $this->commonUserLog($logType, $moduleId, $module, $desc);
+               
+        }
 
         return redirect('documents')->with(
             'message',
@@ -93,6 +105,18 @@ class DocumentController extends Controller
         $documents->publish_date = $request->publish_date;
         $documents->update();
 
+         // user log create
+         if($documents){
+            $logType = 'Updated';
+            $moduleId = $documents->id;
+            $module = 'Document';
+            $desc = auth()->user()->name .' '. $logType .' ' . $module.' '. $documents->title;
+             $this->commonUserLog($logType, $moduleId, $module, $desc);
+               
+        }
+
+
+
         return redirect('documents')->with(
             'message',
             'Document Updated Successfully.'
@@ -107,8 +131,17 @@ class DocumentController extends Controller
             unlink($path);
 
         }
-
         $documents->delete();
+
+         // user log create
+         if($documents){
+            $logType = 'Deleted';
+            $moduleId = $documents->id;
+            $module = 'Document';
+            $desc = auth()->user()->name .' '. $logType .' ' . $module . $documents->title;
+             $this->commonUserLog($logType, $moduleId, $module, $desc);
+               
+        }
       
         return redirect('documents')->with(
             'message',
@@ -139,6 +172,17 @@ class DocumentController extends Controller
         $documents = Document::find($request->id);
         $documents->status = $request->status;
         $documents->save();
+
+         // user log 
+         if($documents){
+            $logType = 'Status Change';
+            $moduleId = $documents->id;
+            $module = 'Document';
+            $desc = auth()->user()->name .' '. $logType .' ' . $module.' '. $documents->title;
+             $this->commonUserLog($logType, $moduleId, $module, $desc);
+               
+        }
+      
         return response()->json(['message' => 'Status Changed successfully.']);
     }
 
@@ -151,13 +195,25 @@ class DocumentController extends Controller
         }
 		foreach ($id as $user) 
 		{
-			$doc=Document::where('id', $user)->delete();
+			$documents=Document::where('id', $user)->delete();
 
-            $path=storage_path('app/public/uploads/'.$doc->document);
-            if (File::exists($path)) {
-                unlink($path);
-            }
 		}
-		return response()->json(['message' => ' successfully.']);
+
+          // user log 
+          if($documents){
+            $logType = 'Deleted';
+            $moduleId = $documents->id;
+            $module = 'Document';
+            $desc = auth()->user()->name .' '. $logType .' ' . $module.' '. $documents->title;
+             $this->commonUserLog($logType, $moduleId, $module, $desc);
+               
+        }
+
+        return redirect()
+        ->back()
+        ->with('message', ' Delete Successfully');
+		// return response()->json(['message' => ' successfully.']);
 	}
+
+
 }

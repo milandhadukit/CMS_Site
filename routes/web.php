@@ -13,6 +13,9 @@ use App\Http\Controllers\Admin\CommunityController;
 use App\Http\Controllers\Admin\VideoManagementController;
 use App\Http\Controllers\Admin\DocumentController;
 
+use App\Http\Controllers\User\DashboardUserController;
+use App\Http\Controllers\User\UserSideController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -31,16 +34,23 @@ use App\Http\Controllers\Admin\DocumentController;
 
 
 Route::get('/', function () {
-    return redirect()->route('login');
+    return redirect()->route('login'); // admin side
+    // return redirect()->route('user.dashboard'); // user side
+
 });
 
-Auth::routes();
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Auth::routes();
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::post('store-login', [LoginController::class, 'storeLogin'])->name('store-login');  //Admin12
 Route::get('logouts', [LoginController::class, 'logout'])->name('logouts');
+
 Route::get('admin-dashboard', [DashboardController::class, 'index'])->name('admin-dashboard');
+Route::get('dashboard-create', [DashboardController::class, 'addDeshboard'])->name('dashboard-create');
+Route::post('dashboard-store', [DashboardController::class, 'storeDeshboard'])->name('dashboard-store');
+
+
 
 Route::get('index-contact', [ContactController::class, 'indexContactDetails'])->name('index-contact');
 Route::get('add-contact', [ContactController::class, 'addContactDetails'])->name('add-contact');
@@ -105,8 +115,6 @@ Route::get('status-video', [VideoManagementController::class, 'changeStatusVideo
 
 
 
-
-
 Route::get('documents', [DocumentController::class, 'index'])->name('documents');
 Route::get('documents/create', [DocumentController::class, 'create'])->name('documents.create');
 Route::post('documents/store', [DocumentController::class, 'store'])->name('documents.store');
@@ -119,9 +127,20 @@ Route::get('documents/display/{document}', [DocumentController::class, 'display'
 Route::get('documents/changeStatus', [DocumentController::class, 'changeStatus'])->name('documents.changeStatus');
 
 
-// Route::post('multipleusersdelete', ['DeleteUserController@multipleusersdelete');
+
+
+
 Route::post('multipleusersdelete', [DocumentController::class, 'multipleusersdelete']);
-
-
 // multiple id delete
 https://techsolutionstuff.com/post/how-to-delete-multiple-records-using-checkbox-in-laravel
+
+
+
+// user side route
+Route::get('user-dashboard', [DashboardUserController::class, 'index'])->name('user.dashboard');
+Route::get('city/{slug}', [UserSideController::class, 'viewCity'])->name('city.slug');
+Route::get('department/{slug}', [UserSideController::class, 'viewDepartment'])->name('department.slug');
+Route::get('service/{slug}', [UserSideController::class, 'viewService'])->name('service.slug');
+Route::get('comminity/{slug}', [UserSideController::class, 'viewCommunity'])->name('comminity.slug');
+Route::get('contact/{slug}', [UserSideController::class, 'viewContact'])->name('contact.slug');
+Route::get('search-data', [UserSideController::class, 'searchData'])->name('search-data');

@@ -27,8 +27,7 @@ class CalendarManagementController extends Controller
             'start_date' => 'required',
             'description' => 'nullable|min:5',
             'time' => 'required',
-            'location'=>'nullable|min:5',
-            
+            'location' => 'nullable|min:5',
         ]);
         try {
             $event = new Event();
@@ -38,9 +37,25 @@ class CalendarManagementController extends Controller
             $event->time = $request->time;
             $event->end_time = $request->end_time;
             $event->location = $request->location;
-            $event->slug=Str::slug($request->title_event);
+            $event->slug = Str::slug($request->title_event);
             // dd($event);
             $event->save();
+
+            // user log create
+            if ($event) {
+                $logType = 'Created';
+                $moduleId = $event->id;
+                $module = 'Event';
+                $desc =
+                    auth()->user()->name .
+                    ' ' .
+                    $logType .
+                    ' ' .
+                    $module .
+                    ' ' .
+                    $event->title_event;
+                $this->commonUserLog($logType, $moduleId, $module, $desc);
+            }
 
             return redirect()
                 ->back()
@@ -63,8 +78,7 @@ class CalendarManagementController extends Controller
             'start_date' => 'required',
             'description' => 'nullable',
             'time' => 'required',
-            'location'=>'nullable|min:5',
-            
+            'location' => 'nullable|min:5',
         ]);
         try {
             $event = Event::find($id);
@@ -75,6 +89,22 @@ class CalendarManagementController extends Controller
             $event->end_time = $request->end_time;
             $event->location = $request->location;
             $event->update();
+
+            // user log 
+            if ($event) {
+                $logType = 'Updated';
+                $moduleId = $event->id;
+                $module = 'Event';
+                $desc =
+                    auth()->user()->name .
+                    ' ' .
+                    $logType .
+                    ' ' .
+                    $module .
+                    ' ' .
+                    $event->title_event;
+                $this->commonUserLog($logType, $moduleId, $module, $desc);
+            }
 
             return redirect()
                 ->back()
@@ -87,9 +117,23 @@ class CalendarManagementController extends Controller
     {
         try {
             $event = Event::find($id);
-         
-            $event->delete();
 
+            $event->delete();
+            // user log 
+            if ($event) {
+                $logType = 'Deleted';
+                $moduleId = $event->id;
+                $module = 'Event';
+                $desc =
+                    auth()->user()->name .
+                    ' ' .
+                    $logType .
+                    ' ' .
+                    $module .
+                    ' ' .
+                    $event->title_event;
+                $this->commonUserLog($logType, $moduleId, $module, $desc);
+            }
             return redirect()
                 ->back()
                 ->with('message', ' Delete Successfully');
@@ -98,13 +142,28 @@ class CalendarManagementController extends Controller
         }
     }
 
-
     public function changeStatusEvent(Request $request)
     {
         $event = Event::find($request->id);
         $event->status = $request->status;
         $event->save();
 
-        return response()->json(['success'=>'Status change successfully.']);
+         // user log 
+         if ($event) {
+            $logType = 'Status change';
+            $moduleId = $event->id;
+            $module = 'Event';
+            $desc =
+                auth()->user()->name .
+                ' ' .
+                $logType .
+                ' ' .
+                $module .
+                ' ' .
+                $event->title_event;
+            $this->commonUserLog($logType, $moduleId, $module, $desc);
+        }
+
+        return response()->json(['success' => 'Status change successfully.']);
     }
 }

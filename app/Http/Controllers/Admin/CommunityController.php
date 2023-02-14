@@ -36,6 +36,18 @@ class CommunityController extends Controller
             $community->slug = Str::slug($request->title);
             // dd($community);
             $community->save();
+
+        // user log 
+        if($community){
+            $logType = 'Created';
+            $moduleId = $community->id;
+            $module = 'Community';
+            $desc = auth()->user()->name .' '. $logType .' ' . $module . $community->title;
+            $this->commonUserLog($logType, $moduleId, $module, $desc);
+            
+        }
+
+
             return redirect()
                 ->back()
                 ->with('message', ' Add Successfully');
@@ -49,6 +61,17 @@ class CommunityController extends Controller
         try {
             $community = Community::where('id', $id)->first();
             $community->delete();
+
+        // user log 
+        if($community){
+            $logType = 'Deleted';
+            $moduleId = $community->id;
+            $module = 'Community';
+            $desc = auth()->user()->name .' '. $logType .' ' . $module . $community->title;
+            $this->commonUserLog($logType, $moduleId, $module, $desc);
+            
+        }
+
             return redirect()
                 ->back()
                 ->with('message', ' Delete Successfully');
@@ -78,8 +101,18 @@ class CommunityController extends Controller
             $community->left_content = $request->left_content;
             $community->right_content = $request->right_content;
             $community->slug = Str::slug($request->title);
-            // dd($community);
             $community->update();
+
+             // user log 
+        if($community){
+            $logType = 'Updated';
+            $moduleId = $community->id;
+            $module = 'Community';
+            $desc = auth()->user()->name .' '. $logType .' ' . $module . $community->title;
+            $this->commonUserLog($logType, $moduleId, $module, $desc);
+            
+        }
+
             return redirect()
                 ->back()
                 ->with('message', ' update Successfully');
@@ -93,6 +126,16 @@ class CommunityController extends Controller
         $community = Community::find($request->id);
         $community->status = $request->status;
         $community->save();
+
+               // user log 
+               if($community){
+                $logType = 'Status change';
+                $moduleId = $community->id;
+                $module = 'Community';
+                $desc = auth()->user()->name .' '. $logType .' ' . $module . $community->title;
+                $this->commonUserLog($logType, $moduleId, $module, $desc);
+                
+            }
         return response()->json(['message' => 'Status change successfully.']);
     }
 

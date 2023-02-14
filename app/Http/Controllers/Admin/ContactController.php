@@ -44,6 +44,16 @@ class ContactController extends Controller
 
             $contact->save();
 
+               // user log 
+               if($contact){
+                $logType = 'Created';
+                $moduleId = $contact->id;
+                $module = 'Contact';
+                $desc = auth()->user()->name .' '. $logType .' ' . $module . $contact->title;
+                $this->commonUserLog($logType, $moduleId, $module, $desc);
+                
+            }
+
             return redirect()
                 ->back()
                 ->with('message', ' Add Successfully');
@@ -93,6 +103,17 @@ class ContactController extends Controller
 
             $contact->update();
 
+
+             // user log 
+             if($contact){
+                $logType = 'Updated';
+                $moduleId = $contact->id;
+                $module = 'Contact';
+                $desc = auth()->user()->name .' '. $logType .' ' . $module . $contact->title;
+                $this->commonUserLog($logType, $moduleId, $module, $desc);
+                
+            }
+
             return redirect()
                 ->back()
                 ->with('message', ' update Successfully');
@@ -114,6 +135,16 @@ class ContactController extends Controller
             }
             $contact->delete();
 
+             // user log 
+        if($contact){
+            $logType = 'Deleted';
+            $moduleId = $contact->id;
+            $module = 'Contact';
+            $desc = auth()->user()->name .' '. $logType .' ' . $module . $contact->title;
+            $this->commonUserLog($logType, $moduleId, $module, $desc);
+            
+        }
+
             return redirect()
                 ->back()
                 ->with('message', ' Delete Successfully');
@@ -132,6 +163,16 @@ class ContactController extends Controller
         $contact = Contact::find($request->id);
         $contact->status = $request->status;
         $contact->save();
+
+        // user log 
+        if($contact){
+            $logType = 'Status change';
+            $moduleId = $contact->id;
+            $module = 'Contact';
+            $desc = auth()->user()->name .' '. $logType .' ' . $module . $contact->title;
+            $this->commonUserLog($logType, $moduleId, $module, $desc);
+            
+        }
 
         return response()->json(['success'=>'Status change successfully.']);
     }

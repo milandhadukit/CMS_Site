@@ -42,7 +42,16 @@ class CityGovernemntController extends Controller
             // dd($cityGoverment);
             $cityGoverment->save();
 
-            return redirect()
+          // user log create
+            if($cityGoverment){
+                $logType = 'Created';
+                $moduleId = $cityGoverment->id;
+                $module = 'CityGovernment';
+                $desc = auth()->user()->name .' '. $logType .' ' . $module . $cityGoverment->title_city;
+                $this->commonUserLog($logType, $moduleId, $module, $desc);
+                
+            }
+                 return redirect()
                 ->back()
                 ->with('message', ' Add Successfully');
         } catch (\Exception $e) {
@@ -54,6 +63,17 @@ class CityGovernemntController extends Controller
         try {
             $cityGoverment = CityGovernment::where('id', $id)->first();
             $cityGoverment->delete();
+
+              // user log 
+              if($cityGoverment){
+                $logType = 'Deleted';
+                $moduleId = $cityGoverment->id;
+                $module = 'CityGovernment';
+                $desc = auth()->user()->name .' '. $logType .' ' . $module . $cityGoverment->title_city;
+                $this->commonUserLog($logType, $moduleId, $module, $desc);
+                
+            }
+
             return redirect()
                 ->back()
                 ->with('message', ' Delete Successfully');
@@ -87,6 +107,16 @@ class CityGovernemntController extends Controller
             // dd($cityGoverment);
             $cityGoverment->update();
 
+                // user log 
+                if($cityGoverment){
+                    $logType = 'Updated';
+                    $moduleId = $cityGoverment->id;
+                    $module = 'CityGovernment';
+                    $desc = auth()->user()->name .' '. $logType .' ' . $module . $cityGoverment->title_city;
+                    $this->commonUserLog($logType, $moduleId, $module, $desc);
+                    
+                }
+
             return redirect()
                 ->back()
                 ->with('message', ' update Successfully');
@@ -99,6 +129,17 @@ class CityGovernemntController extends Controller
         $cityGoverment = CityGovernment::find($request->id);
         $cityGoverment->status = $request->status;
         $cityGoverment->save();
+
+        // user log 
+        if($cityGoverment){
+            $logType = 'Status change';
+            $moduleId = $cityGoverment->id;
+            $module = 'CityGovernment';
+            $desc = auth()->user()->name .' '. $logType .' ' . $module . $cityGoverment->title_city;
+            $this->commonUserLog($logType, $moduleId, $module, $desc);
+            
+        }
+
         return response()->json(['message' => 'Status change successfully.']);
     }
 

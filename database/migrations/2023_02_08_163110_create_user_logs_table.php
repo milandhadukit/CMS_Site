@@ -15,6 +15,11 @@ class CreateUserLogsTable extends Migration
     {
         Schema::create('user_logs', function (Blueprint $table) {
             $table->id();
+            $table->string('log_type');
+            $table->string('module_name');
+            $table->text('description');
+            $table->integer('user_id');
+            $table->integer('module_id');
             $table->timestamps();
         });
     }
