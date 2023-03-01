@@ -14,6 +14,7 @@
 
     <div class="wrapper">
         @include('user.include.header')
+     
 
 
         <div class="content-wrapper">

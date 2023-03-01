@@ -48,7 +48,7 @@ class Controller extends BaseController
         $header['contact'] = Contact::where('slug', $slug)->get();
         $header['city'] = CityGovernment::where('slug', $slug)->get();
         $header['department'] = Department::where('slug', $slug)->get();
-        $header['service'] = Service::where('slug', $slug)->get();
+        $header['service'] = Service::where('slug', $slug)->where('status',1)->get();
         $header['community'] = Community::where('slug', $slug)->get();
         return $header;
     }

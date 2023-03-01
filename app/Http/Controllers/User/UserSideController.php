@@ -18,7 +18,7 @@ class UserSideController extends Controller
         $city = CityGovernment::where('slug', $slug)->get();
         $service = Service::all();
         $community = Community::all();
-        $contact = Contact::all();
+        $contact = Contact::where('status',1)->get();
         $department = Department::all();
         return view(
             'user.cityview',
@@ -31,7 +31,7 @@ class UserSideController extends Controller
         $city = CityGovernment::all();
         $service = Service::all();
         $community = Community::all();
-        $contact = Contact::all();
+        $contact = Contact::where('status',1)->get();
         return view(
             'user.department',
             compact('department', 'service', 'community', 'contact', 'city')
@@ -42,10 +42,10 @@ class UserSideController extends Controller
     public function viewService($slug)
     {
         $service = Service::where('slug', $slug)->get();
-        $city = CityGovernment::all();
-        $department = Department::all();
-        $community = Community::all();
-        $contact = Contact::all();
+        $city = CityGovernment::where('status',1)->get();
+        $department = Department::where('status',1)->get();
+        $community = Community::where('status',1)->get();
+        $contact = Contact::where('status',1)->get();
         return view(
             'user.service',
             compact('department', 'service', 'community', 'contact', 'city')
@@ -58,8 +58,7 @@ class UserSideController extends Controller
         $city = CityGovernment::all();
         $department = Department::all();
         $service = Service::all();
-        $contact = Contact::all();
-
+        $contact = Contact::where('status',1)->get();
         // $header = $this->headerData($slug);
 
         // dd($header);
@@ -82,6 +81,7 @@ class UserSideController extends Controller
 
     public function searchData(Request $request)
     {
+       
         $contact = Contact::all();
         $city = CityGovernment::all();
         $department = Department::all();
@@ -120,6 +120,7 @@ class UserSideController extends Controller
             ->union($communityData)
             ->get();
 
+
         return view(
             'user.Deshboad',
             compact(
@@ -131,5 +132,7 @@ class UserSideController extends Controller
                 'city'
             )
         );
+
+       
     }
 }

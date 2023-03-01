@@ -32,9 +32,9 @@
                                 <td>{{ $data->title_event }}</td>
                                 <td>{{ $data->description }}</td>
 
-                                <td> {{ \Carbon\Carbon::parse($data->start_date)->format('d/m/Y') }}</td>
-                                <td>{{\Carbon\Carbon::parse($data->start_date)->format('l')}}</td>
-                                <td>{{\Carbon\Carbon::parse($data->time)->format('g:i A')}}</td>
+                                    <td> {{ \Carbon\Carbon::parse($data->start_date)->format('d/m/Y') }}</td>
+                                    <td>{{\Carbon\Carbon::parse($data->start_date)->format('l')}}</td>
+                                    <td>{{\Carbon\Carbon::parse($data->time)->format('g:i A')}}</td>
 
                                 @if ( empty ($data->end_time))
 

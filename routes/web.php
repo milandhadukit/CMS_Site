@@ -12,10 +12,9 @@ use App\Http\Controllers\Admin\CityGovernemntController;
 use App\Http\Controllers\Admin\CommunityController;
 use App\Http\Controllers\Admin\VideoManagementController;
 use App\Http\Controllers\Admin\DocumentController;
-
 use App\Http\Controllers\User\DashboardUserController;
 use App\Http\Controllers\User\UserSideController;
-
+use App\Http\Controllers\User\MenuLinkController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -34,10 +33,18 @@ use App\Http\Controllers\User\UserSideController;
 
 
 Route::get('/', function () {
-    return redirect()->route('login'); // admin side
-    // return redirect()->route('user.dashboard'); // user side
+    // return redirect()->route('login'); // admin side
+    return redirect()->route('user.dashboard'); // user side
 
 });
+
+Route::get('/loginAdmin', function () {
+    return redirect()->route('login'); // admin side
+    
+
+});
+
+
 
 // Auth::routes();
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -139,8 +146,15 @@ https://techsolutionstuff.com/post/how-to-delete-multiple-records-using-checkbox
 // user side route
 Route::get('user-dashboard', [DashboardUserController::class, 'index'])->name('user.dashboard');
 Route::get('city/{slug}', [UserSideController::class, 'viewCity'])->name('city.slug');
-Route::get('department/{slug}', [UserSideController::class, 'viewDepartment'])->name('department.slug');
+Route::get('/department/{slug}', [UserSideController::class, 'viewDepartment'])->name('department.slug');
 Route::get('service/{slug}', [UserSideController::class, 'viewService'])->name('service.slug');
 Route::get('comminity/{slug}', [UserSideController::class, 'viewCommunity'])->name('comminity.slug');
 Route::get('contact/{slug}', [UserSideController::class, 'viewContact'])->name('contact.slug');
 Route::get('search-data', [UserSideController::class, 'searchData'])->name('search-data');
+
+Route::get('user-menulink', [MenuLinkController::class, 'menuLink'])->name('user.menulink');
+Route::get('view-event', [MenuLinkController::class, 'viewEvent'])->name('view.event');
+Route::get('view-event-details/{slug}', [MenuLinkController::class, 'viewEventDetails'])->name('view.event.details');
+Route::post('news-store', [MenuLinkController::class, 'emailNewsStore'])->name('news.store');
+Route::get('show-calander', [MenuLinkController::class, 'viewCalanderEvent'])->name('show.calander');
+Route::get('show-details', [MenuLinkController::class, 'eventDetails']);
